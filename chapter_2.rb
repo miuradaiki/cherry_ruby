@@ -49,3 +49,23 @@ greeting =
 # https://tdak.hateblo.jp/entry/20210125/1611579095
 # 三項演算子使ったり、メソッド切り出したりする方が良さそう（個人的偏見）
 
+# ヒアドキュメント（行思考文字列リテラル）
+# 識別子を指定して複数行の文字列を格納できる
+a = <<-TEXT
+aaaaaaa
+bbbbbbb
+ccccc
+ddddddddd
+eeeee
+TEXT
+# puts a
+
+# デフォルト値付きの引数
+# 引数にデフォルト値を設定することができる
+def greet country = "Japan"
+  if country == "Japan"
+    "こんにちは"
+  else
+    "hello"
+  end
+end
