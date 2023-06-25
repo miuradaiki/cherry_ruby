@@ -62,3 +62,25 @@ b = [3, 4, 5]
 # a - b => [1, 2]
 # 積集合
 # a & b => [3]
+
+# whileとuntil
+a = []
+while a.size < 5
+  a << 1
+end
+# a << 1 while a.size < 5 とも書ける
+# a => 1, 1, 1, 1, 1
+
+a = [10, 20, 30, 40, 50]
+until a.size <= 3
+  a.delete_at(-1)
+end
+# a => 10, 20, 30
+
+# for文
+numbers = [1, 2, 3, 4]
+sum = 0
+for n in numbers
+  sum += n
+end
+# sum => 10
