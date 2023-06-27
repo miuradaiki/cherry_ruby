@@ -16,3 +16,13 @@ end
 
 # シンボルは「同じシンボルであれば全く同じオブジェクト」である
 # そのため、「大量の同じ文字列」と「大量の同じシンボル」であれば後者の方が早い
+
+# ハッシュで使用頻度の高いメソッド
+currencies = { "japan" => "yen", "us" => "dollar", "india" => "rupee"}
+currencies.keys #=> [:japan, :us, :india]
+currencies.values #=> ["yen", "dollar", "rupee"]
+
+# has_key?/key?include?/member?
+currencies = { "japan" => "yen", "us" => "dollar", "india" => "rupee"}
+currencies.has_key?(:japan) #=> true
+currencies.has_key?(:iutaly) #=> false
