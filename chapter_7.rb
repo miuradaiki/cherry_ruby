@@ -62,5 +62,36 @@ class User
   end
 end
 
-# クラスメソッドの定義
+# クラスの継承
+# サブクラス < スーパークラスで記述する
+# class DVD < Product
+# end
 
+# superでスーパークラスのメソッドを呼び出す
+class Product
+  attr_reader :name, :price
+
+  def initialize name, price
+    @name = name
+    @price = price
+  end
+end
+
+product = Product.new("A great movie",  1000)
+product.name #=> "A great movie"
+product.price #=> 1000
+
+class DVD < Product
+  attr_reader :running_time
+
+  def initialize name, price, running_time
+    # スーパークラスのinitializeメソッドを呼び出す
+    super(name, price)
+    # DVDクラス独自の属性
+    @running_time = running_time
+  end
+end
+
+dvd = DVD.new("A great movie", 1000, 120)
+dvd.name #=> "A great movie"
+# もし引数がスーパークラスと同じだった場合は、superだけでOK
