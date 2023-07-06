@@ -95,3 +95,20 @@ end
 dvd = DVD.new("A great movie", 1000, 120)
 dvd.name #=> "A great movie"
 # もし引数がスーパークラスと同じだった場合は、superだけでOK
+
+# 定数について
+class Product
+  DEFAULT_PRICE = 0
+end
+
+Product::DEFAULT_PRICE #=> 0
+
+# privateにする
+class Product
+  DEFAULT_PRICE = 0
+  # 定数をprivateにする
+  private_constant :DEFAULT_PRICE
+end
+
+# privateなのでクラスの外部からは参照できない
+Product::DEFAULT_PRICE #=> NameErrorとなる
