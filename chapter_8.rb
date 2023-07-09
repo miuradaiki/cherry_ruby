@@ -35,3 +35,17 @@ user = User.new
 user.name
 
 # このようにモジュールをクラスにincludeして機能を追加することをミックスインと呼ぶ
+
+# includeしたモジュールの有無を確認する
+Product.include?(Loggable) #=> true
+Product.included_modules #=> [Loggable, Kernel]
+
+# ancestorsを使うとモジュールだけでなくスーパークラスの情報も取得できる
+Product.ancestors #=> [Product, Loggable, Object, Kernel, BasicObject]
+
+# クラスオブジェクトだけでなく、インスタンスからも上記は取得できる
+product = Product.new
+product.class #=>Productクラスを返す
+
+product.class.include?(Loggable) #=> true
+product.class.included_modules #=> [Loggable, Kernel]
