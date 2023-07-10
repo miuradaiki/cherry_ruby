@@ -49,3 +49,25 @@ product.class #=>Productクラスを返す
 
 product.class.include?(Loggable) #=> true
 product.class.included_modules #=> [Loggable, Kernel]
+
+
+# Kernelモジュール
+# puts p pp print require loopなど
+
+# ObjectクラスがKernelモジュールをincludeしているため上記メソッドがどこでも使える
+Object.include?(Kernel) #=> true
+
+# トップレベルではmainという名前のオブジェクト
+self #=>main
+self.class #=>Object
+
+# クラス以外のオブジェクトにextendする
+module Loggable
+  def log text
+    puts "[LOG] #{text}"
+  end
+end
+s = "abc"
+# p s.log("Hello") #=>undefined method `log' for "abc":String (NoMethodError)
+s.extend Loggable
+s.log("Hello") #=>[LOG] Hello
