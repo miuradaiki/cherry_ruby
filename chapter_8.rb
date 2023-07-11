@@ -71,3 +71,29 @@ s = "abc"
 # p s.log("Hello") #=>undefined method `log' for "abc":String (NoMethodError)
 s.extend Loggable
 s.log("Hello") #=>[LOG] Hello
+
+
+# module_functionメソッド
+# ミックスインとしてもモジュールの特異メソッドとしても使える
+module Loggable
+  def log text
+    puts "[LOG] #{text}"
+  end
+  # module_functionは対象のメソッドの定義よりも下で呼び出すこと
+  module_function :log
+end
+
+# モジュールの特異メソッドとしてlogメソッドを呼び出す
+Loggable.log("Hello") #=>[LOG] Hello
+
+class Product
+  include Loggable
+
+  def title
+    # includeしたモジュールのlogメソッドを呼び出す
+    log "title is called"
+  end
+end
+
+product = Product.new
+product.title #=>[LOG] title is called
