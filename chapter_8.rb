@@ -97,3 +97,52 @@ end
 
 product = Product.new
 product.title #=>[LOG] title is called
+
+# モジュールに定数を定義する
+module Loggable
+  PREFIX = "[LOG]"
+
+  def log text
+    puts "#{PREFIX} #{text}"
+  end
+end
+
+Loggable::PREFIX #=>"[LOG]"
+
+
+# 状態を保持するモジュール
+module AwesomeApi
+  # 設定値を保持するクラスインスタンス
+  @base_url = ""
+  @debug_mode = false
+
+  # クラスインスタンス変数を読み書きするための特異メソッドを定義する
+  class << self
+    def base_url=(value)
+      @base_url = value
+    end
+
+    def base_url
+      @base_url
+    end
+
+    def debug_mode=(value)
+      @debug_mode = value
+    end
+
+    def debug_mode
+      @debug_mode
+    end
+
+    # 上ではわかりやすくするために明示的にメソッドで定義したが、本来は以下の１行で済む
+    # attr_accessor :base_url, :debug_mode
+  end
+end
+
+# 設定値を保存する
+AwesomeApi.base_url = "http://example.com"
+AwesomeApi.debug_mode = true
+
+# 設定値を参照する
+AwesomeApi.base_url #=>"http://example.com"
+AwesomeApi.debug_mode #=>true
