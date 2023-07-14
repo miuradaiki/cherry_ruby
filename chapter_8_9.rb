@@ -38,3 +38,29 @@ dvd.to_s #=> "<DVD> <B> <A> <Product> #<DVD:0x000000011f8c43b0>"
 
 # 以下でもクラスやモジュールがどの順番でメソッド検索されるか確認可能
 p DVD.ancestors #=>[DVD, B, A, Product, Object, Kernel, BasicObject]
+
+module Greetable
+  def hello
+    "hello."
+  end
+end
+
+module Aisatsu
+  include Greetable
+
+  def konnichiwa
+    "こんにちは・"
+  end
+end
+
+class User
+  include Aisatsu
+end
+
+user = User.new
+
+# Aisatsuモジュールのメソッドを呼び出す
+p user.konnichiwa #=>"こんにちは・"
+p user.hello #=>"hello."
+
+User.ancestors #=>[User, Aisatsu, Greetable, Object, Kernel, BasicObject]
