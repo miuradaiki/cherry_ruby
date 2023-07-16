@@ -65,3 +65,22 @@ begin
     puts "0で除算しました"
 end
 # ZeroDivisionErrorを捕捉した場合のみ実行される
+
+
+# 意図的に例外を発生させる
+def currency_of country
+  case country
+  when :japan
+    "yen"
+  when :us
+    "dollar"
+  when :india
+    "rupee"
+  else
+    # 意図的に例外を発生させる
+    raise ArgumentError, "無名な国名です。#{country}"
+  end
+end
+
+currency_of(:japan) #=>"yen"
+currency_of(:itaily) #=>無名な国名です。itaily (ArgumentError ※例外クラスを渡さない場合RuntimeErrorとなる)
