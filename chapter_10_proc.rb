@@ -92,3 +92,8 @@ end
 judge(25) #=>"大人です"
 judge(18) #=>"子供です"
 judge(20) #=>"はたちです"
+
+# &とto_procメソッド
+reverse_proc = Proc.new { |s| s.reverse }
+# mapメソッドにブロックを渡す代わりに、Procオブジェクトを渡す（ただし＆が必要）
+["Ruby", "Java", "Python"].map(&reverse_proc)
