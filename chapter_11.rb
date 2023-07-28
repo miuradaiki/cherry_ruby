@@ -43,10 +43,26 @@ end
 # パターンマッチを使った場合
 cars.each do |car|
   case car
-    in {name:, engine:, motor:}
-      puts "Hybrid: #{car[:name]} / engine: #{car[:engine]} / motor: #{car[:motor]}"
-    in {name:, engine:}
-      puts "Hybrid: #{car[:name]} / engine: #{car[:engine]}"
-    in {name:, motor:}
-      puts "Hybrid: #{car[:name]} / motor: #{car[:motor]}"
-    end
+  in {name:, engine:, motor:}
+    puts "Hybrid: #{car[:name]} / engine: #{car[:engine]} / motor: #{car[:motor]}"
+  in {name:, engine:}
+    puts "Hybrid: #{car[:name]} / engine: #{car[:engine]}"
+  in {name:, motor:}
+    puts "Hybrid: #{car[:name]} / motor: #{car[:motor]}"
+  end
+end
+
+# パターンマッチの利用パターン
+# valueパターン
+country = "italy"
+
+message =
+  case country
+    in "japan"
+      "こんにちは"
+    in "us"
+      "Hello"
+    in "italy"
+      "Ciao"
+  end
+# message => "Ciao"
