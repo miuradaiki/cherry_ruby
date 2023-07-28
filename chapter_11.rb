@@ -21,3 +21,32 @@ records.map do |records|
   in[y, m, d]
     Date.new(y, m, d)
 end
+
+# ハッシュをパターンマッチさせる
+cars = [
+  {name: "The Beatle", engine: "105ps"},
+  {name: "Prius", engine: "98ps", motor: "72ps"},
+  {name: "Tesla", motor: "306ps"},
+]
+
+# パターンマッチを使わない場合
+cars.each do |car|
+  if car.key?(:engine) && car.key?(:motor)
+    puts "Hybrid: #{car[:name]} / engine: #{car[:engine]} / motor: #{car[:motor]}"
+  elsif car.key?(:engine)
+    puts "Hybrid: #{car[:name]} / engine: #{car[:engine]}"
+  elsif car.key?(:motor)
+    puts "Hybrid: #{car[:name]} / motor: #{car[:motor]}"
+  end
+end
+
+# パターンマッチを使った場合
+cars.each do |car|
+  case car
+    in {name:, engine:, motor:}
+      puts "Hybrid: #{car[:name]} / engine: #{car[:engine]} / motor: #{car[:motor]}"
+    in {name:, engine:}
+      puts "Hybrid: #{car[:name]} / engine: #{car[:engine]}"
+    in {name:, motor:}
+      puts "Hybrid: #{car[:name]} / motor: #{car[:motor]}"
+    end
