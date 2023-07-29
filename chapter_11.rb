@@ -66,3 +66,45 @@ message =
       "Ciao"
   end
 # message => "Ciao"
+
+# パターンが１つもマッチしない場合はエラー（例外）が発生する
+# エラーを発生させたくない場合はelse節を使う
+country = "india"
+
+case country
+  in "japan"
+    "こんにちは"
+  in "us"
+    "Hello"
+  in "italy"
+    "Ciao"
+  else
+    "Unknown"
+end
+#=> "Unknown"
+
+# else節でraiseする
+country = "india"
+
+case country
+  in "japan"
+    "こんにちは"
+  in "us"
+    "Hello"
+  in "italy"
+    "Ciao"
+  else
+    raise "無名な国名です。#{country}"
+end
+
+
+# variableパターン
+# in節のパターンに変数を書いてローカル変数の宣言と代入を同時に行う利用パターン
+# 文字列、数値、配列などマッチする
+
+# 文字列のマッチ例
+case "Alice"
+in obj
+  "obj=#{obj}"
+end
+#=> "obj=Alice"
