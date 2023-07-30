@@ -161,3 +161,40 @@ in {name: "Alice", age: 18.., gender:}
   "gender=#{gender}"
 end
 #=> "gender=female"
+
+
+# asパターン
+# パターンマッチでマッチしたオブジェクトを変数に代入する利用パターン
+case {name: "Alice", age: 20,  gender: :female}
+in {name: String, age:18..}
+  # 「:nameがStringで:ageが18以上のハッシュ」にはマッチするが、:nameや:ageの値が取得できない
+end
+
+case {name: "Alice", age: 20,  gender: :female}
+in {name: String => name, age:18.. => age}
+  # "=> 変数名"でマッチしたオブジェクトを変数に代入できる（asパターン）
+  "name-#{name}, age=#{age}"
+end
+
+
+# alternativeパターン
+# 2つ以上のパターンを指定し、どれか１つにマッチすればマッチしたと見なす利用パターン
+case 2
+in 0 | 1 | 2
+  "matched"
+end
+
+case {name: "Bob", age: 25}
+in {name: "Bob" | "Alice" => name, age:}
+  "name=#{name}, age=#{age}"
+end
+# => "name=Bob, age=25"
+
+
+# findパターン
+# Ruby3.0から*を2回使って「前と後ろにある任意の要素」をパターンとして利用できるようになった
+case [13, 11, 9, 6, 12, 10, 15, 5, 7, 14]
+in [*, 10..=> a, 10..=> b, 10..=> c,, *]
+# 10以上の整数が3つ連続するパターン
+end
+# => a=12, b=10, c=15
