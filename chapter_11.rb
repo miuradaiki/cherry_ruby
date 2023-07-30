@@ -108,3 +108,56 @@ in obj
   "obj=#{obj}"
 end
 #=> "obj=Alice"
+
+
+# arrayパターン
+case [1, 2, 3]
+in [a, b, c]
+  # 配列の要素が3つであればマッチし、尚且つ対応する要素が変数a,b,cに代入される
+  "a=#{a}, b=#{b}, c=#{c}"
+end
+# => "a=1, b=2, c=3"
+
+# _で任意の要素を表現することができる。例外的に2回以上使うことができる。
+case [1, 2, 3]
+in [_, _, 3]
+  "matched"
+end
+
+# in節で*を使うと任意の長さの要素を指定したことになる
+case [1, 2, 3, 4, 5]
+in [1, *rest]
+# 最初の要素が1であればマッチ
+  "matched"
+end
+
+# *を使いたいが変数には入れなくて良いという場合
+case [1, 2, 3, 4, 5]
+in [1, *]
+  "matched"
+end
+# *をなくしてカンマで終わらせても同じ意味となる
+case [1, 2, 3, 4, 5]
+in [1, ]
+  "matched"
+end
+
+# hashパターン
+case {name: "Alice", age: 20}
+in {name: name, age: age}
+  "name~#{name}, age=#{age}"
+end
+
+# 値の変数は省略可能
+# keyの順番はマッチの結果には影響しない
+case {name: "Alice", age: 20}
+in {name: , age: } # {age:, name:}でもマッチする
+  "name~#{name}, age=#{age}"
+end
+
+case {name: "Alice", age: 20, gender: :female}
+in {name: "Alice", age: 18.., gender:}
+  # :nameの値が"Alice"、:ageの値が18以上かつキーに:genderが含まれればマッチ
+  "gender=#{gender}"
+end
+#=> "gender=female"
